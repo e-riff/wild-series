@@ -1,0 +1,21 @@
+// customize some Bootstrap variables
+$primary: #48cfad;
+$secondary: #A7008C;
+$darkGrey: #2D2D2D;
+$lightGrey: #3A3A3A;
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: $darkGrey;
+}
+
+nav {
+    background: $darkGrey;
+}
+
+
+nav img {
+    height:5rem;
+}
