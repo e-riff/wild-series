@@ -7,15 +7,23 @@ $lightGrey: #3A3A3A;
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
+* {
+    color:floralwhite;
+}
 body {
     background-color: $darkGrey;
+    padding-top: 10rem;
 }
 
 nav {
     background: $darkGrey;
 }
 
+logo {
+    position:absolute;
+    right:50%;
+}
 
 nav img {
-    height:5rem;
+    width:5rem;
 }
