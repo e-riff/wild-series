@@ -9,14 +9,15 @@ $lightGrey: #3A3A3A;
 
 * {
     color:floralwhite;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 body {
     background-color: $darkGrey;
-    padding-top: 10rem;
+    padding-top: 8rem;
 }
 
 nav {
-    background: $darkGrey;
+    background: black;
 }
 
 logo {
@@ -26,4 +27,16 @@ logo {
 
 nav img {
     width:5rem;
+}
+
+main img {
+    width:30rem;
+}
+
+main {
+    margin:1rem;
+}
+
+sidebar {
+    border-right : 1px solid;
 }
