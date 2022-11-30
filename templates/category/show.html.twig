@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+    {%  include '/include/_sidebar.html.twig' %}
+    <main>
+        <div>
+            <h1>Toutes les séries dela catégorie : {{ category.name }}</h1>
+        </div>
+        {% for program in programs %}
+            {%  include '/include/_card.html.twig' %}
+            {% else %}
+                <p>Aucune série trouvée</p>
+        {% endfor %}
+
+        <a href="{{ path('category_index') }}">
+            Retour à la liste des categories
+        </a>
+    </main>
+
+{% endblock %}

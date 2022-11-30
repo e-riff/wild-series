@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    {%  include '/include/_sidebar.html.twig' %}
+<main>
+<div>
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/home/emeric/WildCodeSchool/wild-series/src/Controller/CategoryController.php'|file_link(0) }}">src/Controller/CategoryController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/home/emeric/WildCodeSchool/wild-series/templates/category/index.html.twig'|file_link(0) }}">templates/category/index.html.twig</a></code></li>
+    </ul>
+</div>
+    </main>
+{% endblock %}

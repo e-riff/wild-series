@@ -5,11 +5,15 @@
 {% block content %}
 	{%  include '/include/_sidebar.html.twig' %}
 	<main>
-		<h1>{{ website }} - index</h1>
-				<h2>Bienvenue les Wilders ! Symfony ça tranche sa chèvre !</h2>
-				<p>
-					Tcho les nazes !!!
-				</p>
-		<img src="{{ asset('build/images/minx.webp') }}" alt=""/>
+		<h1>Toutes les séries de la table program : </h1>
+		{% for program in programs %}
+{%  include '/include/_card.html.twig' %}
+		{% else %}
+			Aucune série trouvée.
+		{% endfor %}
+
+		<a href="{{ path('app_index') }}">
+			Retour à l'accueil
+		</a>
 	</main>
 {% endblock %}

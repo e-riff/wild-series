@@ -1,0 +1,8 @@
+<div>
+    <h2>
+        <a href="{{ path('program_showDetail', {"id":program.id}) }}">
+            {{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}
+        </a>
+    </h2>
+    <p>{{ program.synopsis }}</p>
+</div>
