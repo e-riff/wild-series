@@ -13,7 +13,7 @@
             {% endfor %}
             <ul>
                 {% for season in program.seasons %}
-                    <li><a href="/program/{{program.id}}/season/{{season.Id}}">{{ season.number }} - {{  season.year }}</a></li>
+                    <li><a href="{{ path("program_season_show", {"program": program.id, "season": season.id }) }}"> {{ season.number }} - {{  season.year }}</a></li>
                 {%  endfor %}
             </ul>
         </div>
