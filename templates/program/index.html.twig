@@ -5,9 +5,8 @@
 {% block content %}
 	{%  include '/include/_sidebar.html.twig' %}
 	<main>
-		<h1>Toutes les séries de la table program : </h1>
 		{% for program in programs %}
-{%  include '/include/_card.html.twig' %}
+			{%  include '/include/_card.html.twig' %}
 		{% else %}
 			Aucune série trouvée.
 		{% endfor %}

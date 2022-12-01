@@ -1,8 +1,9 @@
-<div>
+<article data-program="{{ program.id }}">
+    <img src="/uploads/programs/{{ program.poster }}" />
     <h2>
         <a href="{{ path('program_showDetail', {"id":program.id}) }}">
-            {{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}
+            {{ loop.index }} / {{ program.title }}
         </a>
     </h2>
     <p>{{ program.synopsis }}</p>
-</div>
+</article>

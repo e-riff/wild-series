@@ -30,10 +30,8 @@ class CategoryController extends AbstractController
                 "No program with name : $category found in program's table."
             );
         } else {
-            $programs = $programRepository->findBy(['category' => $category->getId()], limit: 3);
             return $this->render('category/show.html.twig', [
                 'category' => $category,
-                'programs' => $programs,
                 'categories' => $categoryRepository->findAll(),
             ]);
         }

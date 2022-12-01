@@ -8,7 +8,7 @@
         <div>
             <h1>Toutes les séries dela catégorie : {{ category.name }}</h1>
         </div>
-        {% for program in programs %}
+        {% for program in category.programs %}
             {%  include '/include/_card.html.twig' %}
             {% else %}
                 <p>Aucune série trouvée</p>
