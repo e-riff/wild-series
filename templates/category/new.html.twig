@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une Catégorie{% endblock %}
+
+{% block content %}
+
+    {%  include '/include/_sidebar.html.twig' %}
+
+    <main>
+        <h1>Ajouter une nouvelle catégorie :</h1>
+{{  caca }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Add category</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('category_index') }}">
+            Retour à la liste des categories
+        </a>
+    </main>
+
+{% endblock %}

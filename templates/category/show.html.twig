@@ -9,7 +9,13 @@
             <h1>Toutes les séries dela catégorie : {{ category.name }}</h1>
         </div>
         {% for program in category.programs %}
-            {%  include '/include/_card.html.twig' %}
+            {{ loop.first ? "<div class='row row-cols-1 row-cols-md-2 big-articles'>" : "" }}
+            {{ (loop.index0 + 2)%4 == 0 ? "<div class='row row-cols-1 row-cols-md-4 little-articles'>" : "" }}
+
+            {%  include '/include/_card.html.twig' with {index:loop.index0} %}
+
+            {{ loop.index0 == 1 ? "</div class='first-end'>" : "" }}
+            {{ ((loop.index-2)%4 == 0 and (loop.index-2)>0) or loop.last ? "</div class='fourth-end'>" : "" }}
             {% else %}
                 <p>Aucune série trouvée</p>
         {% endfor %}

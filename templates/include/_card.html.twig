@@ -1,9 +1,11 @@
-<article data-program="{{ program.id }}">
-    <img src="/uploads/programs/{{ program.poster }}" />
-    <h2>
-        <a href="{{ path('program_showDetail', {"id":program.id}) }}">
-            {{ loop.index }} / {{ program.title }}
-        </a>
-    </h2>
-    <p>{{ program.synopsis }}</p>
+
+<article data-program="{{ program.id }}" class="border border-1 border-dark p-0 card rounded-0 shadow-1-strong {#{{ index in [0,1] ? "col" : "col-2" }}#}">
+    <div class="h-100 bg-image d-flex align-items-end" style="background-image:url('/uploads/programs/{{ program.poster }}');">
+        <h2>
+            <a class = "{#text-bg-primary#} ps-3 text-white" href="{{ path('program_showDetail', {"id":program.id}) }}">
+                {{ program.title }}
+            </a>
+        </h2>
+    </div>
+    <div class="ps-2 card_icons">{#<img style="object-fit:contain" src="{{ asset('build/images/fav.svg') }}"/>#}O   O   0   0</div>
 </article>

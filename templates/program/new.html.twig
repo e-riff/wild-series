@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une Catégorie{% endblock %}
+
+{% block content %}
+
+    {%  include '/include/_sidebar.html.twig' %}
+
+    <main class="container-fluid">
+        <h1>Ajouter une nouvelle série :</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Ajouter votre série</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('program_index') }}">
+            Retour à la liste des séries
+        </a>
+    </main>
+
+{% endblock %}

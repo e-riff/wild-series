@@ -8,12 +8,13 @@ $lightGrey: #3A3A3A;
 @import "~bootstrap/scss/bootstrap";
 
 * {
-    color:floralwhite;
+    color:darkgrey;
     font-family: 'Merriweather Sans', sans-serif;
 }
+
 body {
     background-color: $darkGrey;
-    padding-top: 8rem;
+    padding-top: 7rem;
 }
 
 nav {
@@ -33,10 +34,40 @@ main img {
     width:30rem;
 }
 
-main {
-    margin:1rem;
+.row > * {
+    flex-shrink:initial;
 }
 
-sidebar {
-    border-right : 1px solid;
+article {
+    background-color: $darkGrey!important;
+}
+
+.big-articles{
+    height:30rem;
+}
+
+.little-articles{
+    height:60rem;
+}
+
+@media screen and (min-width: 600px) {
+    .little-articles{
+
+        height:15rem;
+    }
+}
+
+article>div:first-child {
+    background-size: cover;
+    background-position: center top;
+
+}
+
+article h2 a {
+    text-shadow: 1px 1px 50px black;
+}
+
+
+.card_icons{
+    height:2rem;
 }

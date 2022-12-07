@@ -14,10 +14,6 @@ class Episode
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'episodes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Season $season = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
@@ -26,6 +22,9 @@ class Episode
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $synopsis = null;
+
+    #[ORM\ManyToOne(inversedBy: 'episodes')]
+    private ?Season $season = null;
 
     public function getId(): ?int
     {
