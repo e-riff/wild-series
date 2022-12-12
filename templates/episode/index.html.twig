@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Episode index{% endblock %}
+
+{% block content %}
+    <main class="container">
+    <h1>Episode index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Série</th>
+                <th>Saison</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Number</th>
+                <th>Synopsis</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for episode in episodes |sort((a, b) => a.season.program.title <=> b.season.program.title)|sort((a, b) => a.season.number <=> b.season.number) %}
+            <tr>
+                <td>{{ episode.id }}</td>
+                <td>{{ episode.season.program.title }}</td>
+                <td>{{ episode.season.number }}</td>
+                <td>{{ episode.title }}</td>
+                <td>{{ episode.duration }}</td>
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.synopsis }}</td>
+                <td>
+                    <a href="{{ path('app_episode_show', {'episode_slug': episode.slug}) }}">show</a>
+                    <a href="{{ path('app_episode_edit', {'episode_slug': episode.slug}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_episode_new') }}">Create new</a>
+    </main>
+{% endblock %}

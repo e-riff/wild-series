@@ -7,10 +7,13 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Entity\Program;
 use Faker\Factory;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NBPROGRAMS = 10;
+//    private SluggerInterface $slugger;
+
     public const PROGRAMLIST=[
         [
             "Title" => "Carnival Row",
@@ -90,6 +93,17 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "Year" => "2012"
         ]
     ];
+
+
+    public function __construct(private readonly SluggerInterface $slugger)
+    {
+    }
+
+    public static function getNbOfPrograms():int
+    {
+        return count(self::PROGRAMLIST);
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -102,6 +116,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setPoster($ProgramInfo["Poster"]);
             $program->setYear($ProgramInfo["Year"]);
             $program->setCountry($faker->country());
+            $program->setSlug($this->slugger->slug($ProgramInfo["Title"]));
             $manager->persist($program);
             $this->addReference('program_' . $key, $program);
         }

@@ -7,13 +7,20 @@
         <img class="align-self-start mr-3" src="/uploads/programs/{{ program.poster }}" alt="{{ program.title }} poster"/>
         <div>
             <h1 class="mt-0">{{ program.title }}</h1>
+            <small>Durée totale :
+                {% for period, duration in programDuration %}
+                    {% if duration != 0 %}
+                        {{ duration }} {{ period }}
+                    {% endif %}
+                {% endfor %} - Commencez maintenant et finissez dans <span class="programCounter"></span>
+            </small>
             <p>{{ program.synopsis }}</p>
             {% for category in program.categories %}
                 <p>Catégorie : {{ category.name }}</p>
             {% endfor %}
             <ul>
                 {% for season in program.seasons %}
-                    <li><a href="{{ path("program_season_show", {"program": program.id, "season": season.id }) }}"> {{ season.number }} - {{  season.year }}</a></li>
+                    <li><a href="{{ path("program_season_show", {"program_slug": program.slug, "season": season.id }) }}"> {{ season.number }} - {{  season.year }}</a></li>
                 {%  endfor %}
             </ul>
             <strong>Acteurs :</strong>
@@ -25,6 +32,9 @@
                 {% endfor %}
             </ul>
         </div>
+        <a href="{{ path('program_edit', {'program_slug': program.slug}) }}">edit</a>
+        {{ include('program/_delete_form.html.twig') }}
+
         <a href="{{ path('program_index') }}">
             Retour à la liste des programmes
         </a>
