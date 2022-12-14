@@ -21,12 +21,20 @@ class ProgramDuration
             }
         }
 
+        $totalInterval = $baseTime->diff($baseWithInterval);
+
         return [
-            'years'=>$baseTime->diff($baseWithInterval)->format('%Y'),
-            'months'=>$baseTime->diff($baseWithInterval)->format('%M'),
-            'days'=>$baseTime->diff($baseWithInterval)->format('%D'),
-            'hours'=>$baseTime->diff($baseWithInterval)->format('%H'),
-            'minutes'=>$baseTime->diff($baseWithInterval)->format('%I'),
+            'years'=>$totalInterval->format('%Y'),
+            'months'=>$totalInterval->format('%M'),
+            'days'=>$totalInterval->format('%D'),
+            'hours'=>$totalInterval->format('%H'),
+            'minutes'=>$totalInterval->format('%I'),
+            'total'=>$this->intervalToSeconds($totalInterval)
         ];
+    }
+
+    private function intervalToSeconds(DateInterval $interval):string
+    {
+        return $interval->days * 1440 + $interval->h * 60 + $interval->i;
     }
 }

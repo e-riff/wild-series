@@ -32,11 +32,14 @@ class Season
     #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, cascade: ["remove"])]
     private Collection $episodes;
 
+    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Comment::class)]
+    private Collection $comments;
 
 
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,4 +124,35 @@ class Season
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getSeason() === $this) {
+                $comment->setSeason(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

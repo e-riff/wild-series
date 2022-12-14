@@ -6,6 +6,7 @@ use App\Entity\Actor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ActorType extends AbstractType
 {
@@ -15,8 +16,12 @@ class ActorType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('birthDate')
-            ->add('image')
             ->add('programs', null, ['choice_label' => 'title', 'expanded' => true, 'multiple' => true,])
+            ->add('actorImage', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true, // not mandatory, default is true
+                'download_uri' => true, // not mandatory, default is true
+            ])
         ;
     }
 

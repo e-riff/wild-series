@@ -18,7 +18,7 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
             $actor->setFirstName($faker->firstName());
             $actor->setLastName($faker->lastName());
             $actor->setBirthDate($faker->dateTimeThisCentury);
-
+            $actor->setImage("unnamed.webp");
             $nbOfPrograms = $faker->numberBetween(1, 5);
             //$faker->unique(true)->numberBetween(1, ProgramFixtures::getNbOfPrograms()-1);
             for ($j=0; $j<$nbOfPrograms; $j++)

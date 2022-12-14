@@ -7,7 +7,24 @@
         <h1>{{ program.title }}</h1><small>{{ episode.duration }} min</small>
         <h2>{{ episode.title }} - <i>S{{ season.number }}E{{ episode.number | number_format(2) }}</i></h2>
         <p>{{ episode.synopsis }}</p>
-    <a href="{{ path("program_season_show", {"program_slug": program.slug, "season": season.id }) }}">
+        <div class="container">
+            <div class="col-5">
+                {%  for comment in episode.comments %}
+                    <p>{{ comment.author.email }}</p><p>{{ comment.createdAt|date("m/d/Y H:i:s") }}</p>
+                    <p>{{ comment.comment }}</p>
+                {%  endfor %}
+            {% if app.user %}
+                <h1>Ajout d'un commentaire</h1>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn">{{ button_label|default('Save') }}</button>
+                {{ form_end(form) }}
+            {% else %}
+                <a href="{{ path('app_login') }}"> Se connecter pour ajouter un commentaire</a>
+            {% endif %}
+            </div>
+        </div>
+    <a href="{{ path("program_season_show", {"program_slug": program.slug, "season_number": season.number}) }}">
         Retour à la liste des programmes
     </a>
     </main>

@@ -4,7 +4,7 @@
     </a>
     <hr>
     <ul class="nav flex-column mb-auto">
-        {%  for category in categories %}
+        {%  for category in navigation.getCategories %}
             <li>
                 <a href=" {{ path('category_index') }}{{category.name}}" class="nav-link active" aria-current="page">{{category.name}}</a>
             </li>
@@ -15,5 +15,6 @@
         <hr>
         <li><a href=" {{ path('category_new') }}" class="nav-link active" aria-current="page">Ajout d'une catégorie</a></li>
         <li><a href=" {{ path('program_new') }}" class="nav-link active" aria-current="page">Ajout d'une série</a></li>
+        <li><a href=" {{ path('app_actor_new') }}" class="nav-link active" aria-current="page">Ajout d'un acteur</a></li>
     </ul>
 </sidebar>

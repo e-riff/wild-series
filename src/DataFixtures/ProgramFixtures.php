@@ -12,8 +12,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
-//    private SluggerInterface $slugger;
-
     public const PROGRAMLIST=[
         [
             "Title" => "Carnival Row",
@@ -93,12 +91,12 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "Year" => "2012"
         ]
     ];
-
+    public static $nbOfPrograms = 0;
 
     public function __construct(private readonly SluggerInterface $slugger)
     {
-    }
 
+    }
     public static function getNbOfPrograms():int
     {
         return count(self::PROGRAMLIST);
@@ -119,6 +117,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setSlug($this->slugger->slug($ProgramInfo["Title"]));
             $manager->persist($program);
             $this->addReference('program_' . $key, $program);
+
+            self::$nbOfPrograms++;
         }
         $manager->flush();
     }

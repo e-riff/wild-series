@@ -4,40 +4,70 @@
 
 {% block content %}
     <main>
-        <img class="align-self-start mr-3" src="/uploads/programs/{{ program.poster }}" alt="{{ program.title }} poster"/>
+        <img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster"/>
         <div>
             <h1 class="mt-0">{{ program.title }}</h1>
-            <small>Durée totale :
+            <small id="totalDuration" data-time="{{ programDuration.total }}">Durée totale :
                 {% for period, duration in programDuration %}
-                    {% if duration != 0 %}
+                    {% if duration != 0 and period != "totalInSecond" %}
                         {{ duration }} {{ period }}
                     {% endif %}
-                {% endfor %} - Commencez maintenant et finissez dans <span class="programCounter"></span>
+                {% endfor %} - Commencez maintenant et finissez <span id="programCounter" class="text-primary"></span>
             </small>
             <p>{{ program.synopsis }}</p>
+
             {% for category in program.categories %}
                 <p>Catégorie : {{ category.name }}</p>
             {% endfor %}
+
             <ul>
                 {% for season in program.seasons %}
-                    <li><a href="{{ path("program_season_show", {"program_slug": program.slug, "season": season.id }) }}"> {{ season.number }} - {{  season.year }}</a></li>
-                {%  endfor %}
-            </ul>
-            <strong>Acteurs :</strong>
-            <ul>
-                {% for actor in program.actors %}
-                    <li>{{ actor.firstname }} {{ actor.lastname }}</li>
-                {% else %}
-                    <li>Aucun acteur pour cette série</li>
+                    <li>
+                        <a href="{{ path("program_season_show", {"program_slug": program.slug, "season_number": season.number}) }}"> {{ season.number }}
+                            - {{ season.year }}</a></li>
                 {% endfor %}
             </ul>
-        </div>
-        <a href="{{ path('program_edit', {'program_slug': program.slug}) }}">edit</a>
-        {{ include('program/_delete_form.html.twig') }}
 
-        <a href="{{ path('program_index') }}">
-            Retour à la liste des programmes
-        </a>
+            <div class="container">
+                <div class=" col-5">
+                        {% for comment in program.comments %}
+                            <p>{{ comment.author.email }}</p>
+                            <p>{{ comment.comment }}</p>
+                        {% endfor %}
+                        {% if app.user %}
+                            <h1>Ajout d'un commentaire</h1>
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <button class="btn">{{ button_label|default('Save') }}</button>
+                            {{ form_end(form) }}
+                        {% else %}
+                            <a href="{{ path('app_login') }}"> Se connecter pour ajouter un commentaire</a>
+                        {% endif %}
+                </div>
+
+                <div>
+                    <strong>Acteurs :</strong>
+                    <ul class="list-group">
+                        {% for actor in program.actors %}
+                            <li class="list-group-item"><img src="{{ vich_uploader_asset(actor) }}"
+                                                             alt="{{ actor.firstname }} image"/>
+                                {{ actor.firstname }} {{ actor.lastname }}</li>
+                        {% else %}
+                            <li>Aucun acteur pour cette série</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <a href="{{ path('program_edit', {'program_slug': program.slug}) }}">edit</a>
+
+            {{ include('program/_delete_form.html.twig') }}
+
+            <a href="{{ path('program_index') }}">
+                Retour à la liste des programmes
+            </a>
     </main>
 
 {% endblock %}
